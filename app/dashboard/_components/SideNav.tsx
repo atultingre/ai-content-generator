@@ -33,23 +33,23 @@ const SideNav = () => {
   ]
 
   return (
-    <div className='h-screen p-5 shadow-sm border'>
+    <div className='h-screen py-4 shadow-sm border'>
       <div className='flex justify-center'>
-        <Image src={"/logo.svg"} alt='logo' width={120} height={100} />
+        <Image src={"/logo.svg"} alt='logo' width={80} height={80} />
       </div>
-
-      <div className='mt-10'>
+      <hr className='my-6' border />
+      <div className='px-5 mt-3'>
         {MenuList.map((menu, index) => (
           <div
             key={index}
           >
 
             <Link href={menu.path}
-              className={`flex gap-2 mb-2 p-3 rounded-lg cursor-pointer 
+              className={`flex gap-2 mb-2 p-3 rounded-lg cursor-pointer items-center 
               ${router === menu.path ? 'bg-primary text-white' : 'hover:bg-primary hover:text-white'}`}
             >
-              <menu.icon />
-              <h2>{menu.name}</h2>
+              <menu.icon  className='w-6 h-6'/>
+              <h2 className='text-lg'>{menu.name}</h2>
             </Link>
           </div>
         ))}
