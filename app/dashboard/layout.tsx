@@ -8,11 +8,11 @@ const layout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <div>
+    <div className='bg-slate-100  h-screen'>
       <div className='md:w-64 hidden md:block fixed'>
         <SideNav/>
       </div>
-      <div className='md:ml-64'>
+      <div className='md:ml-64 bg-slate-100'>
         <Header/>
         {children}
       </div>
