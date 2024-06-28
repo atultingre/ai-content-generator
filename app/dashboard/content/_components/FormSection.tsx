@@ -5,13 +5,15 @@ import Image from 'next/image'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
+import { Loader2Icon } from 'lucide-react'
 
 interface PROPS {
   selectedTemplate?: TEMPLATE,
-  userFormInput:any
+  userFormInput: any,
+  loading: boolean
 }
 
-function FormSection({ selectedTemplate }: PROPS) {
+function FormSection({ selectedTemplate, userFormInput, loading }: PROPS) {
 
   const [formData, setFormData] = useState<any>();
 
@@ -23,7 +25,7 @@ function FormSection({ selectedTemplate }: PROPS) {
   const onSubmit = (e: any) => {
     e.preventDefault()
     userFormInput(formData)
-  }
+  } 
 
   return (
     <div className='p-5 shadow-md border rounded-lg bg-white sm:mb-5'>
@@ -35,10 +37,16 @@ function FormSection({ selectedTemplate }: PROPS) {
         {selectedTemplate?.form?.map((item, index) => (
           <div className='my-2 flex gap-2 flex-col mb-7'>
             <label htmlFor="" className='font-bold'>{item.label}</label>
-            {item.field == 'input' ? <Input name={item.name} required={item?.required} onChange={handleInputChange} /> : item.field == 'textarea' ? <Textarea name={item.name} required={item?.required} onChange={handleInputChange} /> : null}
+            {item.field == 'input' ? 
+              <Input name={item.name} required={item?.required} onChange={handleInputChange} /> 
+              : item.field == 'textarea' 
+              ? <Textarea name={item.name} required={item?.required} onChange={handleInputChange} /> 
+              : null}
           </div>
         ))}
-        <Button className='w-full py-6' type='submit'>Generate Content</Button>
+        <Button className='w-full py-6' disabled={loading} type='submit'>
+          {loading&& <Loader2Icon className='animate-spin'/>} Generate Content
+        </Button>
       </form>
     </div>
   )
